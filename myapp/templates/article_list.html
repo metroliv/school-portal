@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Help Center Articles</h1>
+        </header>
+        <div class="article-list">
+            <ul>
+            {% for article in articles %}
+                <li>
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.content }}</p>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <footer>
+            <p>&copy; 2024 Help Center</p>
+        </footer>
+    </div>
+</body>
+</html>

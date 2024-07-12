@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Help Center Categories</h1>
+        </header>
+        <div class="category-list">
+            <ul>
+            {% for category in categories %}
+                <li><a href="{% url 'article_list' category.id %}">{{ category.name }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

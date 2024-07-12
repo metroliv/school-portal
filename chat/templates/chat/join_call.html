@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Join Video Call</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'js/video_call.js' %}"></script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .container {
+        background-color: #fff;
+        padding: 2rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        text-align: center;
+    }
+    
+    h1 {
+        margin-bottom: 1rem;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    label {
+        margin-bottom: 0.5rem;
+    }
+    
+    input {
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    button {
+        padding: 0.5rem 1rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+</style>
+<body>
+    <h1>Video Call - {{ call.call_id }}</h1>
+    <div id="video-call-container">
+        <!-- Video call interface here -->
+        {% for participant in participants %}
+            <div id="participant-{{ participant.user.id }}">
+                {{ participant.user.username }} 
+                {% if is_admin %}
+                    <button onclick="mute('{{ participant.user.id }}')">Mute</button>
+                    <button onclick="unmute('{{ participant.user.id }}')">Unmute</button>
+                    <button onclick="remove('{{ participant.user.id }}')">Remove</button>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    {% if is_admin %}
+        <input type="text" id="invite-link" value="{{ request.build_absolute_uri }}" readonly>
+        <button onclick="copyInviteLink()">Copy Invite Link</button>
+    {% endif %}
+</body>
+</html>

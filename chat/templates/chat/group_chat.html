@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Chat - {{ group.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'js/video_call.js' %}"></script>
+    <style>
+        /* Embedded CSS for Group Chat page */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #start-video-call {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #start-video-call:hover {
+            background-color: #0056b3;
+        }
+
+        #chat-messages {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        #chat-messages p {
+            margin: 10px 0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form textarea {
+            width: calc(100% - 16px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Group Chat - {{ group.name }}</h1>
+    <button id="start-video-call">Start Video Call</button>
+    
+    <div id="chat-messages">
+        {% for message in messages %}
+            <p><strong>{{ message.sender.username }}:</strong> {{ message.content }}</p>
+        {% endfor %}
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send</button>
+    </form>
+    <script>
+        function copyInviteLink() {
+            const inviteLink = document.getElementById("invite-link");
+            inviteLink.select();
+            inviteLink.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            alert("Invite link copied to clipboard!");
+        }
+        
+        
+        function mute(userId) {
+            // Logic to mute user
+            console.log(`User ${userId} has been muted.`);
+        }
+        
+        function unmute(userId) {
+            // Logic to unmute user
+            console.log(`User ${userId} has been unmuted.`);
+        }
+        
+        function remove(userId) {
+            // Logic to remove user from call
+            console.log(`User ${userId} has been removed from the call.`);
+        }
+        
+        
+    </script>
+</body>
+</html>

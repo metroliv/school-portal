@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Portal</title>
+</head>
+<style>
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #1976D2;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header .user-info {
+    margin-right: 2rem;
+}
+
+header .user-info h2 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 1rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: #45a049;
+}
+
+
+.logout {
+    margin-left: auto;
+}
+
+main {
+    padding: 2rem;
+}
+
+section {
+    display: none;
+}
+
+section.active {
+    display: block;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: #f4f4f4;
+    padding: 1rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 1rem;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #ddd;
+}
+
+.main-content {
+    flex: 1;
+    padding: 1rem;
+    background-color: white;
+    margin-left: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#message-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+#new-message {
+    width: calc(100% - 90px);
+    padding: 0.5rem;
+}
+
+#send-message {
+    padding: 0.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#send-message:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background-color: #1976D2;
+    color: white;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-section h3 {
+    margin-top: 0;
+}
+
+.footer-section p, .footer-section a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 1rem;
+}
+ul  a:hover{
+    
+    
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    display: block;
+    background-color: #ddd;
+}
+
+
+image{
+    background-color: #ddd;
+    border-radius: 50px;
+}
+</style>
+<body>
+    <header>
+        <nav>
+        <div class="navbar">
+        
+                <nav class="profile">
+                    
+                <ul>
+                <li><a href="#" id="profile-link">School Portal</a></li>
+                </ul>
+                </nav>
+            <div class="user-info">
+                    {% if user.is_authenticated %}
+                        <h2>Welcome, {{ user.username }}</h2>
+                    {% else %}
+                        <h1>School Portal</h1>
+                    {% endif %}
+                </div>
+
+                <ul>
+                    <li><a href="#" id="dashboard-link">Dashboard</a></li>
+                    <li><a href="{% url 'chat_list' %}" id="chat_list">Chat with Users</a></li>
+                    <li><a href="#" id="assignments-link">Assignments</a></li>
+                    
+                    <div class="logout">
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">Sign In</a></li>
+                        {% endif %}
+                    </div>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard" class="active">
+            <h1>Dashboard</h1>
+            <p>Welcome to the School Portal!</p>
+            <div class="container">
+                <div class="sidebar">
+                    <ul>
+                        <li><a href="{% url 'student_list' %}" id="student_list_link">Students</a></li>
+                        
+                         <li><a  href="{% url 'staff_list' %}" id ="staff_list_link">staff</a></li>
+                        <li><a href="#" id="enter-marks-link">Enter Marks</a></li>
+                        <li><a href="{% url 'profile' %}" id="profile_link">Profile</a></li>                       
+                       
+                        <li><a href="{% url 'category_list' %}" id="category_list">Help</a></li>
+                        <li><a href="post_detail.html">post</a></li>
+                        <li><a href="{% url 'group_list' %}">Community</a></li>
+                        <li><a href="#">New group</a></li>
+                        <li><a href="#">chats</a></li>
+                        <li><a href="#">Announcements</a></li>
+                        <li><a href="#">create live chat</a></li>
+                        <li><a href="create_group">WhatsApp Group</a></li>
+                        <li><a href="#">account</a></li>                        
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="#">pin event</a></li>
+                        <li><a href="#">meeting</a></li>
+                        <li><a href="{% url 'user_settings' %}" id="settings-link">Settings</a></li>
+                    </ul>
+                </div>
+                <div class="main-content" id="main-content">
+                    <img src="try.jpeg" alt="logo">
+                    <li><a href="#">staff</a></li>
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </section>
+
+        <section id="messages">
+            <h1>Messages</h1>
+            <div id="message-list">
+                <!-- Messages will be displayed here -->
+            </div>
+            <input type="text" id="new-message" placeholder="Type a message...">
+            <button id="send-message">Send</button>
+        </section>
+
+        <section id="assignments">
+            <h1>Assignments</h1>
+            <div id="assignment-list">
+                <p>not aveilabe now</p>
+            </div>
+        </section>
+
+        <section id="profile">
+            <h1>Profile</h1>
+            <div id="profile-info">
+                <!-- Profile information here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@schoolportal.com</p>
+                <p>Phone: +254-799-553-357</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p><a href="#">Facebook</a></p>
+                <p><a href="#">Twitter</a></p>
+                <p><a href="#">Instagram</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#">Home</a></p>
+                <p><a href="#">Events</a></p>
+                <p><a href="#">Members</a></p>
+                <p><a href="{% url 'category_list' %}" id="category_list">Help Center</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your School Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

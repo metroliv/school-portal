@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removed from Call</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .container {
+        background-color: #fff;
+        padding: 2rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        text-align: center;
+    }
+    
+    h1 {
+        margin-bottom: 1rem;
+    }
+    
+    p {
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    
+</style>
+<body>
+    <input type="text" id="invite-link" value="https://example.com/invite">
+    <button onclick="copyInviteLink()">Copy Invite Link</button>
+
+    <button onclick="mute('user123')">Mute</button>
+    <button onclick="unmute('user123')">Unmute</button>
+    <button onclick="remove('user123')">Remove</button>
+    <div class="container">
+        <h1>Removed from Call</h1>
+        <p>You have been removed from the video call.</p>
+        <a href="{% url 'home' %}" class="btn">Return to Home</a>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Settings</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="navbar">
+                <h1>School Portal</h1>
+                <div class="user-info">
+                    {% if user.is_authenticated %}
+                        <h2>Welcome, {{ user.username }}</h2>
+                    {% else %}
+                        <h1>School Portal</h1>
+                    {% endif %}
+                </div>
+                <ul>
+                    <li><a href="{% url 'dashboard' %}" id="dashboard-link">Dashboard</a></li>
+                    <li><a href="{% url 'messages' %}" id="messages-link">Messages</a></li>
+                    <li><a href="{% url 'assignments' %}" id="assignments-link">Assignments</a></li>
+                    <li><a href="{% url 'profile' %}" id="profile-link">Profile</a></li>
+                    <li><a href="{% url 'user_settings' %}" id="settings-link">Settings</a></li>
+                    <div class="logout">
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">Sign In</a></li>
+                        {% endif %}
+                    </div>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="settings">
+            <h1>User Settings</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@church.com</p>
+                <p>Phone: +254-799-553-357</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p><a href="#">Facebook</a></p>
+                <p><a href="#">Twitter</a></p>
+                <p><a href="#">Instagram</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#">Home</a></p>
+                <p><a href="#">Events</a></p>
+                <p><a href="#">Members</a></p>
+                <p><a href="#">Help Center</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Church App. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

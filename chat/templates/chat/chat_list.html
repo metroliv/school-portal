@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Users</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        /* Embedded CSS for chat list */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        li a {
+            display: block;
+            padding: 10px;
+            background-color: #fff;
+            text-decoration: none;
+            color: #333;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        li a:hover {
+            background-color: #f0f0f0;
+        }
+        button{
+            background-color: aqua;
+            margin-left: 95%;
+            border: none;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            
+        } 
+        button:hover{
+            
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+           
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Chat Users</h1>
+    <button><a href="/">home</button>
+    <ul>
+        {% for user in users %}
+            <li><a href="{% url 'chat_room' user.username %}">{{ user.username }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

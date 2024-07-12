@@ -1,0 +1,117 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<h1>{% room %}</h1>
+<form id="post-form" method="POST" action="{% url 'checkview' %}">
+    {% csrf_token %}
+    <input type="hidden" name="username" id="username" value="username">
+    <input type="hidden" name="room_id" id="room_id" value="room_id">
+    <input type="text" name="message" id="message" width="100px">
+    <input type="submit" value="send">
+</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ room.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="navbar">
+                <h1>School Portal</h1>
+                <div class="user-info">
+                    {% if user.is_authenticated %}
+                        <h2>Welcome, {{ user.username }}</h2>
+                    {% else %}
+                        <h1>School Portal</h1>
+                    {% endif %}
+                </div>
+                <ul>
+                    <li><a href="{% url 'dashboard' %}" id="dashboard-link">Dashboard</a></li>
+                    <li><a href="{% url 'messages' %}" id="messages-link">Messages</a></li>
+                    <li><a href="{% url 'assignments' %}" id="assignments-link">Assignments</a></li>
+                    <li><a href="{% url 'profile' %}" id="profile-link">Profile</a></li>
+                    <li><a href="{% url 'user_settings' %}" id="settings-link">Settings</a></li>
+                    <div class="logout">
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">Sign In</a></li>
+                        {% endif %}
+                    </div>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="room-details">
+            <h1>{{ room.name }}</h1>
+            <p>{{ room.description }}</p>
+            <!-- Add other room details here -->
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@church.com</p>
+                <p>Phone: +254-799-553-357</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p><a href="#">Facebook</a></p>
+                <p><a href="#">Twitter</a></p>
+                <p><a href="#">Instagram</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#">Home</a></p>
+                <p><a href="#">Events</a></p>
+                <p><a href="#">Members</a></p>
+                <p><a href="#">Help Center</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Church App. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
+
+<div id="messages"></div>
+<script>
+  // Ensure jQuery is loaded
+$(document).ready(function(){
+    $('#post-form').on('submit', function(event){
+        event.preventDefault();  // Prevent the default form submission
+
+        $.ajax({
+            url: $(this).attr('action'),  // Use the form's action attribute
+            type: 'POST',
+            data: $(this).serialize(),  // Serialize form data
+            dataType: 'json',
+            success: function(response){
+                // Handle the server response here
+                if (response.success) {
+                    $('#messages').append('<p>' + response.message + '</p>');
+                    $('#message').val('');  // Clear the message input field
+                } else {
+                    alert('An error occurred: ' + response.error);
+                }
+            },
+            error: function(xhr, status, error){
+                // Handle the error
+                alert('An error occurred: ' + error);
+            }
+        });
+    });
+});
+  
+</script>

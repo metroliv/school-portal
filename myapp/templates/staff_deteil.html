@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1>{{ staff.name }}</h1>
+        <a class="btn btn-secondary" href="{% url 'staff_update' staff.pk %}">Edit</a>
+        <a class="btn btn-danger" href="{% url 'staff_delete' staff.pk %}">Delete</a>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th style="width: 30%;">Name</th>
+                    <td>{{ staff.name }}</td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td>{{ staff.age }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ staff.email }}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ staff.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td>{{ staff.location }}</td>
+                </tr>
+                <tr>
+                    <th>Hobby</th>
+                    <td>{{ staff.hobby }}</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ staff.get_gender_display }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="{% url 'staff_list' %}">Back to List</a>
+    </div>
+</div>
+{% endblock %}
