@@ -2,14 +2,20 @@
   "version": 2,
   "builds": [
     {
-      "src": "myvictor1/wsgi.py",
+      "src": "manage.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "myvictor1/wsgi.py"
+      "dest": "manage.py"
     }
-  ]
+  ],
+  "env": {
+    "SECRET_KEY": "victor",
+    "DEBUG": "False",
+    "DATABASE_URL": "dj-database-url
+"
+  }
 }
