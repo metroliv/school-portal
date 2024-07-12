@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block title %}{{ school_class.name }}{% endblock %}
+
+{% block content %}
+  <h2>{{ school_class.name }}</h2>
+  <a href="{% url 'class_edit' school_class.pk %}">Edit</a>
+  <a href="{% url 'class_delete' school_class.pk %}">Delete</a>
+  <h3>Streams</h3>
+  <ul>
+    {% for stream in school_class.streams.all %}
+      <li><a href="{% url 'stream_detail' stream.pk %}">{{ stream.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'stream_add' school_class.pk %}">Add Stream</a>
+{% endblock %}

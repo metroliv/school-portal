@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Add/Edit Class{% endblock %}
+
+{% block content %}
+  <h2>{{ view.action }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}

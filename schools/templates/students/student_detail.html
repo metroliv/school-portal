@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block title %}{{ student.first_name }} {{ student.last_name }}{% endblock %}
+
+{% block content %}
+  <h2>{{ student.first_name }} {{ student.last_name }}</h2>
+  <a href="{% url 'student_edit' student.pk %}">Edit</a>
+  <a href="{% url 'student_delete' student.pk %}">Delete</a>
+{% endblock %}

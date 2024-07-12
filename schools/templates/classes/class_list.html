@@ -1,0 +1,17 @@
+{% load static %}
+{% extends "base_generic.html" %}
+
+{% block title %}Classes{% endblock %}
+
+{% block content %}
+  <h2>Classes in {{ school.name }}</h2>
+  <ul>
+    {% for class in object_list %}
+      <li><a href="{% url 'class_detail' class.pk %}">{{ class.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'class_add' school.pk %}">Add Class</a>
+{% endblock %}
+
+
+

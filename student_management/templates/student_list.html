@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+<
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <h1>Student List</h1>
+        <a class="btn btn-primary" href="{% url 'student_create' %}">Add New Student</a>
+        <input type="search" name="search" value="search">
+        
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            {% for student in students %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{% url 'student_detail' student.pk %}">{{ student.name }}</a>
+                    <span>
+                        <a class="btn btn-secondary btn-sm" href="{% url 'student_update' student.pk %}">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'student_delete' student.pk %}">Delete</a>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

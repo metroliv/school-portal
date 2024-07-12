@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block title %}{{ school.name }}{% endblock %}
+
+{% block content %}
+  <h2>{{ school.name }}</h2>
+  <p>Address: {{ school.address }}</p>
+  <a href="{% url 'school_edit' school.pk %}">Edit</a>
+  <a href="{% url 'school_delete' school.pk %}">Delete</a>
+  <h3>Classes</h3>
+  <ul>
+    {% for class in school.classes.all %}
+      <li><a href="{% url 'class_detail' class.pk %}">{{ class.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'class_add' school.pk %}">Add Class</a>
+{% endblock %}

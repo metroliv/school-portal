@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Schools{% endblock %}
+
+{% block content %}
+  <h2>Schools</h2>
+  <ul>
+    {% for school in object_list %}
+      <li><a href="{% url 'school_detail' school.pk %}">{{ school.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'school_add' %}">Add School</a>
+{% endblock %}
