@@ -1,0 +1,28 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "myvictor1/wsgi.py",
+        "use": "@vercel/python",
+        "config": {
+          "maxLambdaSize": "50mb",
+          "runtime": "python3.8"
+        }
+      },
+      {
+        "src": "staticfiles/**/*",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/static/(.*)",
+        "dest": "/staticfiles/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "myvictor1/wsgi.py"
+      }
+    ]
+  }
+  
